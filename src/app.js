@@ -28,7 +28,7 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/', index);
-app.use('/customer', customer);
+app.use('/customers', customer);
 app.use('/products', products);
 app.use('/user', user);
 
