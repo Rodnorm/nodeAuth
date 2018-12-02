@@ -4,6 +4,7 @@ const index = require('./routes/route.index');
 const customers = require('./routes/route.customers');
 const products = require('./routes/route.products');
 const users = require('./routes/route.users');
+const orders = require('./routes/route.orders');
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -31,5 +32,6 @@ app.use('/', index);
 app.use('/customers', customers);
 app.use('/products', products);
 app.use('/user', users);
+app.use('/orders', orders);
 
 module.exports = app;

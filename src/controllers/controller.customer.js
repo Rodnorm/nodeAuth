@@ -12,7 +12,7 @@ exports.authenticate = async (req, res, next) => {
             "senha": `${req.body.senha}`
         }).end(async (response) => {
 
-            const token = await authService.generateToken({login: req.body.login});
+            const token = await authService.generateToken({ login: req.body.login });
             res.send({
                 data:
                 {
@@ -31,11 +31,11 @@ exports.authenticate = async (req, res, next) => {
     }
 }
 exports.getUserDetails = async (req, res, next) => {
-    
+
     try {
         Request.get(`${global.API_ENDPOINT}cliente/cliente/${req.params.login}`, { json: true },
             async (req, response, next) => {
-               res.send(response.body);
+                res.send(response.body);
             });
     } catch (e) {
         res.status(400).send({
@@ -44,3 +44,20 @@ exports.getUserDetails = async (req, res, next) => {
         });
     }
 }
+
+exports.postCustomer = async (req, res, next) => {
+    
+    try {
+        unirest.post(`${global.API_ENDPOINT}cliente/save`).header('Content-Type', 'application/json')
+        .send(req.body)
+        .end(async (response) => {
+            res.send(response);
+        });
+
+        } catch (e) {
+            res.status(400).send({
+                message: "Erro",
+                data: e
+            });
+        }
+    }
