@@ -7,11 +7,20 @@ const authService = require('../services/auth.service');
 exports.authenticate = async (req, res, next) => {
 
     try {
-        unirest.post('http://localhost:8080/cliente/auth').header('Content-Type', 'application/json').send({
+        unirest.post(`${global.API_ENDPOINT}cliente/auth`).header('Content-Type', 'application/json').send({
             "login": `${req.body.login}`,
             "senha": `${req.body.senha}`
-        }).end((response) => {
-            res.send(response.body);
+        }).end(async (response) => {
+
+            const token = await authService.generateToken({login: req.body.login});
+            res.send({
+                data:
+                {
+                    login: req.body.login,
+                    token: token
+                },
+                server: response.body
+            });
         });
 
     } catch (e) {
@@ -22,26 +31,11 @@ exports.authenticate = async (req, res, next) => {
     }
 }
 exports.getUserDetails = async (req, res, next) => {
-
+    
     try {
-        Request.get(`http://localhost:8080/cliente/cliente/${req.body.email}`, { json: true },
+        Request.get(`${global.API_ENDPOINT}cliente/cliente/${req.params.login}`, { json: true },
             async (req, response, next) => {
-                console.log(response.body);
-                const token = await authService.generateToken({
-                    id: response.body.data[0].idCliente,
-                    email: response.body.data[0].email,
-                    name: response.body.data[0].nome
-                });
-                res.send({
-                    data:
-                    {
-                        email: response.body.data[0].email,
-                        name: response.body.data[0].nome,
-                        token: token
-                        
-                    }
-                });
-
+               res.send(response.body);
             });
     } catch (e) {
         res.status(400).send({

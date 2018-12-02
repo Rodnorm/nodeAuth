@@ -1,9 +1,9 @@
 'use strict'
 
 const index = require('./routes/route.index');
-const customer = require('./routes/route.customer');
+const customers = require('./routes/route.customers');
 const products = require('./routes/route.products');
-const user = require('./routes/route.user');
+const users = require('./routes/route.users');
 
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -28,8 +28,8 @@ app.use((req, res, next) => {
 
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use('/', index);
-app.use('/customers', customer);
+app.use('/customers', customers);
 app.use('/products', products);
-app.use('/user', user);
+app.use('/user', users);
 
 module.exports = app;

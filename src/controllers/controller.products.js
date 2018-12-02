@@ -6,7 +6,8 @@ const Request = require('request');
 exports.get = async (req, res, next) => {
 
     try {
-        Request.get('http://localhost:8080/produto/list-produto', { json: true },
+        // Request.get(`${global.API_ENDPOINT}${req.body.nodeAuth.url}`, { json: true },
+        Request.get(`${global.API_ENDPOINT}produto/list-produto`, { json: true },
             (req, response, next) => res.send({message: 'success', data: response.body.data}));
 
     } catch (e) {
