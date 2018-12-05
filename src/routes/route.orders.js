@@ -5,8 +5,8 @@ const router = express.Router();
 const controller = require('../controllers/controller.orders');
 const authService = require('../services/auth.service');
 
-router.get('/:login', authService.authorize, controller.get);
-router.post('/order/create', authService.authorize, controller.post);
+router.post('/:login', authService.authorize, controller.postGetOrdersByEmail);
+router.post('/order/create', authService.authorize, controller.postCreate);
 
 
 module.exports = router;

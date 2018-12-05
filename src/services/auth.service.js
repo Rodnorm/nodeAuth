@@ -24,3 +24,25 @@ exports.authorize = (req, res, next) => {
         });
     }
 }
+
+exports.session = (req, res, next) => {
+    
+    console.log(req.headers);
+    
+    let token = req.body.token || req.query.token || req.headers['x-access-token'];
+    if (!token) {
+        res.status(401).json({
+            message: 'Acesso restrito'
+        });
+    } else {
+        jwt.verify(token, global.SALT_KEY, (error, decoded) => {
+            if (error) {
+                res.status(401).json({
+                    message: 'Token inválido'
+                });
+            } else {
+                res.status(200).json({message: 'Autorizado'});
+            }
+        });
+    }
+}

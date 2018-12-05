@@ -2,12 +2,12 @@
 const unirest = require('unirest');
 const Request = require('request');
 
-exports.get = async (req, res, next) => {
+exports.postGetOrdersByEmail = async (req, res, next) => {
 
     try {
         try {
 
-            Request.get(`${global.API_ENDPOINT}pedido/history/${req.params.login}`, { json: true },
+            Request.post(`${global.API_ENDPOINT}pedido/history/${req.params.login}`, { json: true },
                 async (req, response, next) => {
                     res.send(response.body);
                 });
@@ -24,7 +24,7 @@ exports.get = async (req, res, next) => {
     }
 }
 
-exports.post = async (req, res, next) => {
+exports.postCreate = async (req, res, next) => {
     try {
         try {
             unirest.post(`${global.API_ENDPOINT}pedido/save`).header('Content-Type', 'application/json')
