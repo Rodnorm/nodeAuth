@@ -30,6 +30,8 @@ exports.postCreate = async (req, res, next) => {
             unirest.post(`${global.API_ENDPOINT}pedido/save`).header('Content-Type', 'application/json')
                 .send(req.body)
                 .end(async (response) => {
+                    console.log(response);
+                    
                     res.send(response);
                 });
         } catch (err) {
@@ -37,6 +39,5 @@ exports.postCreate = async (req, res, next) => {
         }
     } catch (e) {
         console.error(e);
-
     }
 }

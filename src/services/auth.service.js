@@ -6,6 +6,7 @@ exports.generateToken  = async (data) => {
 }
 
 exports.authorize = (req, res, next) => {
+
     let token = req.body.token || req.query.token || req.headers['x-access-token'];
 
     if (!token) {
@@ -25,9 +26,7 @@ exports.authorize = (req, res, next) => {
     }
 }
 
-exports.session = (req, res, next) => {
-    
-    console.log(req.headers);
+exports.session = (req, res, next) => {    
     
     let token = req.body.token || req.query.token || req.headers['x-access-token'];
     if (!token) {

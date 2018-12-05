@@ -30,6 +30,7 @@ exports.authenticate = async (req, res, next) => {
         });
     }
 }
+
 exports.getUserDetails = async (req, res, next) => {
 
     try {
