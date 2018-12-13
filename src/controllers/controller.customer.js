@@ -15,10 +15,10 @@ exports.authenticate = async (req, res, next) => {
             const token = await authService.generateToken({ login: req.body.login });
             res.send({
                 data:
-                {
-                    login: req.body.login,
-                    token: token
-                },
+                    {
+                        login: req.body.login,
+                        token: token
+                    },
                 server: response.body
             });
         });
@@ -47,18 +47,34 @@ exports.getUserDetails = async (req, res, next) => {
 }
 
 exports.postCustomer = async (req, res, next) => {
-    
+
     try {
         unirest.post(`${global.API_ENDPOINT}cliente/save`).header('Content-Type', 'application/json')
-        .send(req.body)
-        .end(async (response) => {
-            res.send(response);
-        });
-
-        } catch (e) {
-            res.status(400).send({
-                message: "Erro",
-                data: e
+            .send(req.body)
+            .end(async (response) => {
+                res.send(response);
             });
-        }
+
+    } catch (e) {
+        res.status(400).send({
+            message: "Erro",
+            data: e
+        });
     }
+}
+
+exports.letMeKnow = async (req, res, next) => {
+    try {
+        unirest.post(`${global.API_ENDPOINT}cliente/enviaEmail`).header('Content-Type', 'application/json')
+            .send(req.body)
+            .end(async (response) => {
+                res.send(response);
+            });
+
+    } catch (e) {
+        res.status(400).send({
+            message: "Erro",
+            data: e
+        });
+    }
+}    
