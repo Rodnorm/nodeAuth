@@ -94,3 +94,19 @@ exports.contact = async (req, res, next) => {
         });
     }
 }  
+
+exports.update = async (req, res, next) => {
+    try {
+        unirest.post(`${global.API_ENDPOINT}cliente/update`).header('Content-Type', 'application/json')
+            .send(req.body)
+            .end(async (response) => {
+                res.send(response);
+            });
+
+    } catch (e) {
+        res.status(400).send({
+            message: "Erro",
+            data: e
+        });
+    }
+}  
