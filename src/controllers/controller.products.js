@@ -20,7 +20,7 @@ exports.get = async (req, res, next) => {
 
 exports.getByName = async (req, res, next) => {
     try {
-        Request.get(`${global.API_ENDPOINT}produto/nome`, { json: true },
+        Request.get(`${global.API_ENDPOINT}produto/nome${req.params.name}`, { json: true },
             (req, response, next) => res.send({message: 'success', data: response.body.data}));
 
     } catch (e) {
