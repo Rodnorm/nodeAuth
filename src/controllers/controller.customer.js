@@ -77,4 +77,20 @@ exports.letMeKnow = async (req, res, next) => {
             data: e
         });
     }
-}    
+}
+
+exports.contact = async (req, res, next) => {
+    try {
+        unirest.post(`${global.API_ENDPOINT}cliente/EmailContatoCliente`).header('Content-Type', 'application/json')
+            .send(req.body)
+            .end(async (response) => {
+                res.send(response);
+            });
+
+    } catch (e) {
+        res.status(400).send({
+            message: "Erro",
+            data: e
+        });
+    }
+}  
